@@ -7,6 +7,7 @@ import ROUTES from 'constants/routes';
 import NHMLayout from 'cores/layout';
 
 function Splash() {
+  
   return (
     <NHMLayout>
       <Outlet />

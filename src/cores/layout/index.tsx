@@ -44,7 +44,7 @@ export default function NHMLayout({ children }: { children: JSX.Element }) {
             </Dropdown>
           </div>
         </Layout.Header>
-        <Layout.Content className='layout-content'>{children}</Layout.Content>
+        <Layout.Content className='layout-content content'>{children}</Layout.Content>
       </Layout>
     </Layout>
   );

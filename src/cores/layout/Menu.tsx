@@ -4,12 +4,21 @@ import MENU_LIST from 'constants/menuList';
 import PATH from 'constants/path';
 import string from 'constants/text';
 import type { MenuProps } from 'antd';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import './style.css';
+import { useMemo } from 'react';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function NHMMenu() {
+
+  const {pathname} = useLocation();
+
+  const getSelectKeys = useMemo(() => {
+    if(pathname === '/') return PATH.HOME;
+    return pathname;
+  }, [])
+
   return (
     <>
       <div>
@@ -22,7 +31,7 @@ export default function NHMMenu() {
         <Menu
           mode='inline'
           theme='dark'
-          // selectedKeys={defaultSelectedKeys}
+          selectedKeys={[getSelectKeys]}
           // defaultOpenKeys={openKeys}
           items={MENU_LIST.map(item => {
             if (item.sub) {
