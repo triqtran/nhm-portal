@@ -1,32 +1,46 @@
 import { Avatar, Dropdown, Layout, Typography } from 'antd';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { MenuProps } from 'antd';
 import NavBar from './NavBar';
 import SiderBar from './SiderBar';
 import NHMMenu from './Menu';
 import { UserOutlined } from '@ant-design/icons';
 import { AvatarContainer, LayoutContent, LayoutHeader, Trigger } from './style';
-
-const itemsDropdown: MenuProps['items'] = [
-  {
-    key: 'logout',
-    label: (
-      <Typography.Text
-        onClick={() => {
-          console.log('logout');
-        }}
-      >
-        Logout
-      </Typography.Text>
-    ),
-  },
-];
+import { useDispatch, useSelector } from 'reduxStore/hooks';
+import { logout } from 'modules/Auth/slice';
+import { useNavigate } from 'react-router-dom';
+import PATH from 'constants/path';
+import { shallowEqual } from 'react-redux';
 
 export default function NHMLayout({ children }: { children: JSX.Element }) {
   const [collapsed, setCollapsed] = useState(false);
+  const { auth } = useSelector(state => state.auth, shallowEqual);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const toggle = () => {
     setCollapsed(state => !state);
   };
+
+  const itemsDropdown: MenuProps['items'] = useMemo(
+    () => [
+      {
+        key: 'logout',
+        label: (
+          <Typography.Text
+            onClick={() => {
+              dispatch(logout());
+              navigate(PATH.LOGIN);
+            }}
+          >
+            Logout
+          </Typography.Text>
+        ),
+      },
+    ],
+    [dispatch]
+  );
+
   return (
     <Layout hasSider>
       <NavBar
@@ -59,7 +73,7 @@ export default function NHMLayout({ children }: { children: JSX.Element }) {
               placement='bottomLeft'
             >
               <div>
-                <span style={{ marginRight: 10 }}>Name</span>
+                <span style={{ marginRight: 10 }}>{auth?.name}</span>
                 <Avatar icon={<UserOutlined />} />
               </div>
             </Dropdown>

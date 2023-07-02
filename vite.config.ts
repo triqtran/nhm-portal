@@ -16,6 +16,8 @@ export default defineConfig({
       content: path.resolve(__dirname, './src/content'),
       hook: path.resolve(__dirname, './src/hook'),
       assets: path.resolve(__dirname, './src/assets'),
+      types: path.resolve(__dirname, './src/types'),
+      reduxStore: path.resolve(__dirname, './src/reduxStore'),
     },
   },
 });
