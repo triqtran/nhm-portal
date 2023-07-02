@@ -1,10 +1,10 @@
 import Home from 'modules';
 
-type Routes = {
+interface Routes {
   title: string;
   path: string;
   Component: () => JSX.Element;
-};
+}
 
 const ROUTES = [
   {

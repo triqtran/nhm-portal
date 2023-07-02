@@ -1,0 +1,26 @@
+.ant-drawer.navbar-theme {
+  position: inherit !important;
+}
+
+.navbar-theme.ant-drawer-content-wrapper,
+.navbar-theme.ant-drawer-content {
+  background: #001529 !important;
+}
+
+.navbar-theme .ant-drawer-close {
+  color: white;
+}
+
+.ant-drawer.navbar-theme {
+  position: inherit !important;
+}
+
+.navbar-theme .ant-drawer-content-wrapper,
+.navbar-theme .ant-drawer-content {
+  background: inherit !important;
+}
+
+.ant-drawer-body::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  display: none;
+}

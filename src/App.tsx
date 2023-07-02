@@ -5,9 +5,10 @@ import { ConfigProvider } from 'antd';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import ROUTES from 'constants/routes';
 import NHMLayout from 'cores/layout';
+import Login from 'modules/Login';
+import 'cores/styles/global.css';
 
 function Splash() {
-  
   return (
     <NHMLayout>
       <Outlet />
@@ -23,10 +24,14 @@ function App() {
           <Routes>
             <Route path='/' element={<Splash />}>
               {ROUTES.map(route => (
-                <Route key={route.path} path={route.path} element={<route.Component />} />
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={<route.Component />}
+                />
               ))}
             </Route>
-            <Route path='/login' element={<div>LOGIN</div>} />
+            <Route path='/login' element={<Login />} />
           </Routes>
         </BrowserRouter>
       </ConfigProvider>

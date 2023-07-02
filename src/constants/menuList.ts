@@ -1,12 +1,12 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import PATH from './path';
 
-export type MenuListItem = {
+export interface MenuListItem {
   title: string;
   icon: any;
   path?: string;
   sub?: MenuListItem[];
-};
+}
 
 export type MenuList = MenuListItem[];
 

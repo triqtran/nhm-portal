@@ -1,4 +1,4 @@
-import { ButtonProps as BtnProps } from 'antd';
+import { type ButtonProps as BtnProps } from 'antd';
 import { StyledButton } from './style';
 
 export type ButtonProps = BtnProps;

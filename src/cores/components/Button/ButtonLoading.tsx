@@ -1,4 +1,4 @@
-import { ButtonProps } from 'antd';
+import { type ButtonProps } from 'antd';
 import { useState } from 'react';
 import { StyledButton } from './style';
 
@@ -9,10 +9,12 @@ export type ButtonLoadingProps = {
 const ButtonLoading = ({ onClick, children, ...props }: ButtonLoadingProps) => {
   const [handling, setHandling] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setHandling(true);
-    return onClick().finally(() => {
+    return await onClick().finally(() => {
       setHandling(false);
+
+      
     });
   };
 

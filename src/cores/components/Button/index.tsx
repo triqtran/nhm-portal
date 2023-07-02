@@ -1,7 +1,6 @@
-import { ForwardRefExoticComponent } from 'react';
-import { ButtonProps } from './Button';
+import { type ForwardRefExoticComponent } from 'react';
+import InternalButton, { type ButtonProps } from './Button';
 import ButtonLoading from './ButtonLoading';
-import InternalButton from './Button';
 
 type CompoundedComponent = ForwardRefExoticComponent<ButtonProps> & {
   Loading: typeof ButtonLoading;

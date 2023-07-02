@@ -1,13 +1,13 @@
-import Sider from 'antd/lib/layout/Sider';
+import { SideBar } from './style';
 
-type SiderBarProps = {
+interface SiderBarProps {
   menu: JSX.Element;
-};
+}
 
 export default function SiderBar({ menu }: SiderBarProps) {
   return (
-    <Sider className='sidebar' breakpoint='md' collapsedWidth={60} trigger={null} width={250}>
+    <SideBar breakpoint='md' collapsedWidth={60} trigger={null} width={250}>
       {menu}
-    </Sider>
+    </SideBar>
   );
 }

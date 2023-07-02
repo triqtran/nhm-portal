@@ -1,44 +1,38 @@
 import { Menu } from 'antd';
-import Text from 'antd/lib/typography/Text';
 import MENU_LIST from 'constants/menuList';
 import PATH from 'constants/path';
-import string from 'constants/text';
 import type { MenuProps } from 'antd';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import './style.css';
 import { useMemo } from 'react';
+import { LogoContainer } from './style';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function NHMMenu() {
-
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const getSelectKeys = useMemo(() => {
-    if(pathname === '/') return PATH.HOME;
+    if (pathname === '/') return PATH.HOME;
     return pathname;
-  }, [])
+  }, []);
 
   return (
     <>
       <div>
-        <div
-          id='logo'
-          style={{ height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
+        <LogoContainer id='logo'>
           <Link to={PATH.HOME}>NIHAOMA</Link>
-        </div>
+        </LogoContainer>
         <Menu
           mode='inline'
           theme='dark'
           selectedKeys={[getSelectKeys]}
           // defaultOpenKeys={openKeys}
           items={MENU_LIST.map(item => {
-            if (item.sub) {
+            if (item.sub != null) {
               return {
                 key: item.path,
                 label: (
-                  <div className='flex justify' title={item.title}>
+                  <div title={item.title}>
                     <span>{item.title}</span>
                   </div>
                 ),
@@ -48,7 +42,7 @@ export default function NHMMenu() {
                     ({
                       key: subItem.path,
                       label: (
-                        <div className='flex justify' title={subItem.title}>
+                        <div title={subItem.title}>
                           <NavLink to={subItem.path || '/'}>
                             <span>{subItem.title}</span>
                           </NavLink>

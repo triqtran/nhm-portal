@@ -17,18 +17,7 @@
   border-radius: 8px !important;
 }
 
-.ant-drawer.navbar-theme {
-  position: inherit !important;
-}
 
-.navbar-theme.ant-drawer-content-wrapper,
-.navbar-theme.ant-drawer-content {
-  background: #001529 !important;
-}
-
-.navbar-theme .ant-drawer-close {
-  color: white;
-}
 
 .ant-drawer-body,
 .sidebar {
@@ -41,14 +30,7 @@
   display: none;
 }
 
-.ant-drawer.navbar-theme {
-  position: inherit !important;
-}
 
-.navbar-theme .ant-drawer-content-wrapper,
-.navbar-theme .ant-drawer-content {
-  background: inherit !important;
-}
 
 .ant-drawer-content-wrapper {
   max-width: 100% !important;
