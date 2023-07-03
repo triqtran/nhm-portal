@@ -54,7 +54,7 @@ export const getProfile = (): AppThunk => dispatch => {
     .catch(err => {
       dispatch(
         updateAuth({
-          error: err.error.show || errors.LOGIN_FAIL,
+          error: err?.error?.show || errors.LOGIN_FAIL,
         })
       );
     });
@@ -78,7 +78,7 @@ export const login =
       .catch(err => {
         dispatch(
           updateAuth({
-            error: err.error.show || errors.LOGIN_FAIL,
+            error: err?.error?.show || errors.LOGIN_FAIL,
           })
         );
       });

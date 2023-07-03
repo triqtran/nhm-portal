@@ -32,7 +32,7 @@ export default function Login() {
     if (!auth.authenticating && auth.token) {
       navigate(PATH.HOME);
     }
-  }, [auth.authenticating, auth.token]);
+  }, [auth.authenticating, auth.token, navigate]);
 
   useTitle(TITLE.LOGIN);
 

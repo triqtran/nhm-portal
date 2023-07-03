@@ -45,7 +45,7 @@ export default function NHMLayout({ children }: { children: JSX.Element }) {
         ),
       },
     ],
-    [dispatch]
+    [dispatch, navigate]
   );
 
   return (

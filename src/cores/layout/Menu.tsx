@@ -14,7 +14,7 @@ export default function NHMMenu() {
   const getSelectKeys = useMemo(() => {
     if (pathname === '/') return PATH.HOME;
     return pathname;
-  }, []);
+  }, [pathname]);
 
   return (
     <>
