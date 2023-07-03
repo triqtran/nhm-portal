@@ -1,22 +1,26 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthState, LogInRequest } from './type';
 import { AppThunk } from 'reduxStore/store';
 import apis from './apis';
 import { authStorage } from 'utils/localStorage';
+import errors from 'constants/errors';
 
 const initialState: AuthState = {
   auth: null,
   token: null,
   authenticating: false,
+  error: null,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    updateAuth: (state, action: PayloadAction<AuthState>) => {
-      state.auth = action.payload.auth;
-      state.token = action.payload.token;
+    updateAuth: (state, action: PayloadAction<Partial<AuthState>>) => {
+      state.authenticating = false;
+      state.auth = action.payload.auth || null;
+      state.token = action.payload.token || null;
+      state.error = action.payload.error || null;
     },
     removeAuth: state => {
       state.authenticating = false;
@@ -24,45 +28,60 @@ export const authSlice = createSlice({
       state.token = null;
       authStorage.remove();
     },
+    startAuth: state => {
+      state.authenticating = true;
+      state.auth = null;
+      state.token = null;
+      state.error = null;
+    },
   },
-  extraReducers: builder => {
-    builder
-      .addCase(login.pending || getProfile.pending, state => {
-        state.authenticating = true;
+});
+
+const { updateAuth, removeAuth, startAuth } = authSlice.actions;
+
+export const getProfile = (): AppThunk => dispatch => {
+  dispatch(startAuth());
+  return apis
+    .getProfile()
+    .then(res => {
+      dispatch(
+        updateAuth({
+          auth: res.data,
+          token: authStorage.get(),
+        })
+      );
+    })
+    .catch(err => {
+      dispatch(
+        updateAuth({
+          error: err.error.show || errors.LOGIN_FAIL,
+        })
+      );
+    });
+};
+
+export const login =
+  (data: LogInRequest): AppThunk =>
+  dispatch => {
+    dispatch(startAuth());
+    return apis
+      .login(data)
+      .then(res => {
+        dispatch(
+          updateAuth({
+            auth: res.data,
+            token: res.token,
+          })
+        );
       })
-      .addCase(login.fulfilled, (state, action) => {
-        state.authenticating = false;
-        state.token = action.payload.token;
-        state.auth = action.payload.data;
-        if (state.token) {
-          authStorage.set(state.token);
-        }
-      })
-      .addCase(getProfile.fulfilled, (state, action) => {
-        state.authenticating = false;
-        state.token = authStorage.get();
-        state.auth = action.payload.data;
-      })
-      .addCase(login.rejected || getProfile.rejected, state => {
-        state.authenticating = false;
+      .catch(err => {
+        dispatch(
+          updateAuth({
+            error: err.error.show || errors.LOGIN_FAIL,
+          })
+        );
       });
-  },
-});
-
-const { removeAuth } = authSlice.actions;
-
-export const login = createAsyncThunk(
-  'auth/login',
-  async (data: LogInRequest) => {
-    const response = await apis.login(data);
-    return response;
-  }
-);
-
-export const getProfile = createAsyncThunk('/auth/profile', async () => {
-  const response = await apis.getProfile();
-  return response;
-});
+  };
 
 export const logout = (): AppThunk => dispatch => {
   dispatch(removeAuth());

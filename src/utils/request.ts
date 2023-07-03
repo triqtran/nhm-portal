@@ -4,6 +4,7 @@ import { authStorage } from './localStorage';
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
   timeout: 10 * 1000,
+  validateStatus: null,
 });
 
 request.interceptors.request.use(
@@ -18,7 +19,7 @@ request.interceptors.response.use(
   response => {
     const res = response.data;
     if (res.success) return res;
-    return Promise.reject(response);
+    return Promise.reject(res);
   },
   error => Promise.reject(error)
 );

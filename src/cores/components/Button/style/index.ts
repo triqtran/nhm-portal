@@ -6,8 +6,4 @@ interface StyledButtonProps {
   background?: string;
 }
 
-export const StyledButton = styled(Button)<StyledButtonProps>`
-  color: ${props => props.theme.colors[props?.color ?? 'black'] || props.color};
-  background-color: ${props =>
-    props.theme.colors[props?.background ?? 'white'] || props.background};
-`;
+export const StyledButton = styled(Button)<StyledButtonProps>``;

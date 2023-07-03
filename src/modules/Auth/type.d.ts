@@ -16,4 +16,5 @@ export interface AuthState {
   auth: NHMAccount | null;
   token: string | null;
   authenticating: boolean;
+  error: string | null;
 }
