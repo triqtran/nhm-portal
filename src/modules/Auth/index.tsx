@@ -36,7 +36,7 @@ export default function Login() {
   return (
     <LogInContainer>
       <LogInTitle>{text.LOGIN}</LogInTitle>
-      <Form onFinish={handleLogin} layout='vertical'>
+      <Form onFinish={handleLogin} layout='vertical' validateTrigger='submit'>
         <Form.Item
           name='email'
           rules={[
@@ -45,14 +45,14 @@ export default function Login() {
           ]}
           label={text.EMAIL}
         >
-          <Input size='large' onFocus={() => setIsReTouched(true)} />
+          <Input onFocus={() => setIsReTouched(true)} />
         </Form.Item>
         <Form.Item
           name='password'
           rules={[{ required: true, message: text.PASSWORD_REQUIRED }]}
           label={text.PASSWORD}
         >
-          <Input.Password size='large' onFocus={() => setIsReTouched(true)} />
+          <Input.Password onFocus={() => setIsReTouched(true)} />
         </Form.Item>
         {auth.error && !isReTouched && (
           <ErrorText type='danger'>{auth.error}</ErrorText>
