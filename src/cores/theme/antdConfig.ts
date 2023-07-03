@@ -6,6 +6,7 @@ const antdConfig = {
     colorPrimary: colors.primary,
     green: colors.green,
     borderRadius: 8,
+    fontFamily: 'Lexend Deca',
   },
   components: {},
 } as ThemeConfig;

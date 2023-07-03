@@ -1,5 +1,5 @@
 import { MenuFoldOutlined } from '@ant-design/icons';
-import { Layout } from 'antd';
+import { Layout, Typography } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import styled from 'styled-components';
 
@@ -55,8 +55,16 @@ export const SideBar = styled(Sider)`
   top: 0;
   bottom: 0;
   @media (max-width: 992px) {
-    .sidebar {
-      display: none;
-    }
+    display: none;
   }
+`;
+
+export const LogoImg = styled.img`
+  width: 150px;
+  height: auto;
+  margin: 20px auto;
+`;
+
+export const CopyRight = styled(Typography.Paragraph)`
+  text-align: center;
 `;

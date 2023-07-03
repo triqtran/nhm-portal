@@ -3,6 +3,7 @@ const colors = {
   green: 'green',
   white: 'white',
   black: 'black',
+  error: 'red',
 };
 
 export default colors;
