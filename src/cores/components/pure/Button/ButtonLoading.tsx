@@ -13,8 +13,6 @@ const ButtonLoading = ({ onClick, children, ...props }: ButtonLoadingProps) => {
     setHandling(true);
     return await onClick().finally(() => {
       setHandling(false);
-
-      
     });
   };
 

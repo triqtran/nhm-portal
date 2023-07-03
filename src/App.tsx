@@ -1,7 +1,7 @@
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import { antdConfig, styledConfig } from './cores/theme';
-import { ConfigProvider, Spin } from 'antd';
+import { ConfigProvider } from 'antd';
 import {
   BrowserRouter,
   Navigate,
@@ -18,27 +18,24 @@ import { shallowEqual } from 'react-redux';
 import { authStorage } from 'utils/localStorage';
 import { getProfile } from 'modules/Auth/slice';
 import PATH from 'constants/path';
+import { Loading } from 'cores/components';
+import { useEffect } from 'react';
 
 function Splash() {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth, shallowEqual);
 
-  if (!auth.token) {
-    // check in localStorage
-    // if have -> fetch token
-    if (authStorage.get()) {
+  useEffect(() => {
+    if (!auth.token && authStorage.get()) {
       dispatch(getProfile());
     }
-    // if no -> redirect to login screen
-    else {
-      return <Navigate to={PATH.LOGIN} />;
-    }
+  }, [auth.token, dispatch]);
 
-    return (
-      <div>
-        <Spin spinning />
-      </div>
-    );
+  if (!auth.token) {
+    if (authStorage.get()) {
+      return <Loading />;
+    }
+    return <Navigate to={PATH.LOGIN} />;
   }
 
   return (

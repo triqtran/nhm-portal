@@ -5,12 +5,19 @@ import NavBar from './NavBar';
 import SiderBar from './SiderBar';
 import NHMMenu from './Menu';
 import { UserOutlined } from '@ant-design/icons';
-import { AvatarContainer, LayoutContent, LayoutHeader, Trigger } from './style';
+import {
+  AvatarContainer,
+  CopyRight,
+  LayoutContent,
+  LayoutHeader,
+  Trigger,
+} from './style';
 import { useDispatch, useSelector } from 'reduxStore/hooks';
 import { logout } from 'modules/Auth/slice';
 import { useNavigate } from 'react-router-dom';
 import PATH from 'constants/path';
 import { shallowEqual } from 'react-redux';
+import text from 'constants/text';
 
 export default function NHMLayout({ children }: { children: JSX.Element }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -80,6 +87,7 @@ export default function NHMLayout({ children }: { children: JSX.Element }) {
           </AvatarContainer>
         </LayoutHeader>
         <LayoutContent>{children}</LayoutContent>
+        <CopyRight type='secondary'>{text.COPYRIGHT}</CopyRight>
       </Layout>
     </Layout>
   );

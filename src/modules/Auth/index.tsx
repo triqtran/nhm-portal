@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import text from 'constants/text';
+import text, { TITLE } from 'constants/text';
 import { Button } from 'cores/components';
 import { LogInRequest } from './type';
 import { login } from './slice';
@@ -14,6 +14,7 @@ import {
   LogInContainer,
   LogInTitle,
 } from './styles';
+import { useTitle } from 'hook';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ export default function Login() {
       navigate(PATH.HOME);
     }
   }, [auth.authenticating, auth.token]);
+
+  useTitle(TITLE.LOGIN);
 
   return (
     <LogInContainer>

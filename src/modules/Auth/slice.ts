@@ -67,6 +67,7 @@ export const login =
     return apis
       .login(data)
       .then(res => {
+        authStorage.set(res.token);
         dispatch(
           updateAuth({
             auth: res.data,

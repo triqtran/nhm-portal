@@ -4,7 +4,7 @@ import PATH from 'constants/path';
 import type { MenuProps } from 'antd';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
-import { LogoContainer } from './style';
+import { LogoContainer, LogoImg } from './style';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -20,7 +20,9 @@ export default function NHMMenu() {
     <>
       <div>
         <LogoContainer id='logo'>
-          <Link to={PATH.HOME}>NIHAOMA</Link>
+          <Link to={PATH.HOME}>
+            <LogoImg src='/logo.jpg' />
+          </Link>
         </LogoContainer>
         <Menu
           mode='inline'
